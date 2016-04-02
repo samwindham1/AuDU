@@ -7,6 +7,5 @@ module.exports = {
         'password'  : '',
     	'charset'   : 'UTF8MB4_GENERAL_CI'
     },
-	'database': 'audu_users',
-    'users_table': 'users'
+	'database': 'audu'
 };
