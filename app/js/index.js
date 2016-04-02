@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	init();
 	getTracks();
 	
 	//Set up soundcloud secret
@@ -60,12 +61,12 @@ function getTracks(){
 	$.ajax({
 		url: "/getTracks"
 	}).done(function(data) {
-		for(var i = 0; i < data.length; i++){
+		for(var i = 0; i < data.length; i++){			
 			$('#trackContainer').append(
 				"<ul>" +
 					"<li>" + 
 						"<div class='track' id=" + data[i].id + ">" +
-							"<div class='trackInfo'>" + data[i] + "</div>" + 
+							"<div class='trackInfo'>" + data[i].name + "</div>" + 
 							"<div class='soundcloudContainer'></div><script>$('.soundcloudContainer').hide();</script>" + 
 						"</div>" +
 					"</li>" +

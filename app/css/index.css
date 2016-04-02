@@ -34,8 +34,10 @@
 	background-color: #EEE;
 }
 .trackInfo{
+	box-sizing: border-box;
 	width: 100%;
 	height: 80px;
+	padding: 10px;
 }
 .soundcloudContainer{
 	width: 100%;
