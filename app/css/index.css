@@ -1,6 +1,33 @@
-html {
-
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
 }
-body {
-  
+#trackContainer{
+	height: 100%;
+	width: 100%;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	box-sizing: border-box;
+}
+#trackContainer ul{
+	list-style-type: none;
+	padding: 0;
+}
+#header{
+	box-sizing: border-box;
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	color: #FFF;
+	background-color: #333;
+	text-align: center; 
+}
+.track{
+	box-sizing: border-box;
+	width: 100%;
+	padding: 4px;
+}
+.track:hover{
+	background-color: #EEE;
 }

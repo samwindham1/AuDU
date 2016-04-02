@@ -20,13 +20,13 @@ pool.getConnection(function(error, connection){
 	});
 	
 	//Exchange information through ajax
-	app.get('/getInfo', function (req, res) {
-		connection.query("SELECT * FROM `users` WHERE `id` = " + req.query.getThisID, function(errorQ1, rowsQ1){	
+	app.get('/getPosts', function (req, res) {	
+		connection.query("SELECT * FROM `users`", function(errorQ1, rowsQ1){	
 			if (errorQ1){
 				console.log("ERROR: " + errorQ1 + " : " + rowsQ1); return errorQ1;
 			}
 			else{					 
-				res.send(rowsQ1[0].username);
+				res.send(rowsQ1);
 			}
 		});
 	});
