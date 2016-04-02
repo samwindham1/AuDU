@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 05:21 AM
+-- Generation Time: Apr 02, 2016 at 05:27 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `audu`
 --
+CREATE DATABASE IF NOT EXISTS `audu` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `audu`;
 
 -- --------------------------------------------------------
 
