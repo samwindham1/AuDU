@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	init();
-	getTracks();
+	//getTracks();
 	
 	//Set up soundcloud secret
 	SC.initialize({
