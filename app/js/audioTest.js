@@ -29,10 +29,14 @@ function init(){
 	//Set up canvas
 	var canvas = document.getElementById("mainCanvas");
 	var canvasCtx = canvas.getContext("2d");
+	canvas.style.width ='100%';
+	canvas.style.height ='100%';
+	canvas.width  = canvas.offsetWidth;
+	canvas.height  = canvas.offsetHeight;
 
 	//Clear canvas
-	var WIDTH = 500;
-	var HEIGHT = 500;
+	var WIDTH = canvas.width;
+	var HEIGHT = canvas.height;
 	canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
 	function draw() {	
