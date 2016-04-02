@@ -38,7 +38,15 @@ function init(){
 	var WIDTH = canvas.width;
 	var HEIGHT = canvas.height;
 	canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
+	
+	
+	var e = 0;
+	var buffer = [];
+	var counter = 0;
+	var hit = false;
+	var bufferSize = 10;
+	
+	
 	function draw() {	
 		//Begin animation
 		requestAnimationFrame(draw);
@@ -46,24 +54,48 @@ function init(){
 		//Get the actual byte data
 		analyser.getByteFrequencyData(dataArray);
 		
+		var volume =  avgVolume(dataArray);
+		
+		if(counter < bufferSize){
+			if(volume > Math.max.apply(null, buffer)){
+				hit = true;
+			}
+			
+			if(buffer.length  < bufferSize){
+				buffer.push(volume);
+			}
+			else{
+				buffer[counter] = volume;
+			}
+			
+			counter ++;
+		}
+		else{
+			counter = 0;
+		}
+		
+		
 		//Clear screen
 		canvasCtx.fillStyle = 'rgb(0, 0, 0)';
 		canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
-		var barWidth = (WIDTH / bufferLength);
-		var barHeight;
-		var x = 0;
-
-		for(var i = 0; i < bufferLength; i++) {
-			barHeight = dataArray[i];
-
-			//Draw individual bar
-			canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ', 50, 50)';
-			canvasCtx.fillRect(x,  HEIGHT - barHeight, barWidth, barHeight);
-
-			x += barWidth + 1;
+		
+		if(hit){
+			canvasCtx.fillStyle = 'rgb(255, 0, 0)';
+			canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+			hit = !hit;
 		}
+		
+		
 	};
-
+	
 	draw();
+}
+
+
+function avgVolume(array){
+	var values = 0;
+	for(var i = 0; i < array.length; i++){
+		values += array[i];
+	}
+	return values / array.length;
 }
