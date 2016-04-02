@@ -5,21 +5,50 @@ $(document).ready(function(){
 	SC.initialize({
 	  client_id: '58479d90aaeccef837849be331f895ca'
 	});
-
-	$(document).on('click', '.track', function(){		
-		var scContainer = $(this).find(".soundcloudContainer");
 	
-		if(scContainer.css("display") === "none"){
+	var currentSelectedID;
+	$(document).on('click', '.track', function(){	
+	
+		var scContainer = $(this).find(".soundcloudContainer");
+		
+		//If it doesn't exist
+		if(currentSelectedID === undefined){
+			//Set initial value
+			currentSelectedID = this.id;
+			
+			scContainer.show();
 			scContainer.html(
 				getEmbeddedPlayer(this.id, scContainer)
 			);
-		
-			scContainer.show();
 		}
 		else{
-			scContainer.hide();
-			scContainer.empty();
+			if(this.id == currentSelectedID){
+				if(scContainer.css("display") === "none"){
+					scContainer.show();
+					scContainer.html(
+						getEmbeddedPlayer(this.id, scContainer)
+					);
+				}
+				else{
+					scContainer.hide();
+					scContainer.empty();
+				}
+			}
+			else{
+				//Hide old one
+				$("#" + currentSelectedID).find(".soundcloudContainer").hide();
+				$("#" + currentSelectedID).find(".soundcloudContainer").empty();
+				
+				//Show the new one
+				scContainer.show();
+				scContainer.html(
+					getEmbeddedPlayer(this.id, scContainer)
+				);
+				
+				currentSelectedID = this.id; 
+			}
 		}
+		
 	});
 	
 	//Admin only
@@ -37,7 +66,7 @@ function getTracks(){
 					"<li>" + 
 						"<div class='track' id=" + data[i].id + ">" +
 							"<div class='trackInfo'>" + data[i] + "</div>" + 
-							"<div class='soundcloudContainer'></div>" + 
+							"<div class='soundcloudContainer'></div><script>$('.soundcloudContainer').hide();</script>" + 
 						"</div>" +
 					"</li>" +
 				"</ul>"
@@ -76,8 +105,9 @@ function getEmbeddedPlayer(id, divID){
 		}
 	}).done(function(data) {
 		//All info about track returned in data
-		SC.oEmbed(data.url, { auto_play: false }).then(function(oEmbed) {
+		SC.oEmbed(data.url, { auto_play: false, maxheight: 166, show_comments: false}).then(function(oEmbed) {
 			$(divID).html(oEmbed.html);
+			$(divID).children[0].focus();
 		});
 	}).fail(function(xhr, status, error){
 		console.log("Status: " + status + " Error: " + error);
