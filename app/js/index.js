@@ -1,5 +1,16 @@
 $(document).ready(function(){
 	getPosts();
+		
+	SC.initialize({
+	  client_id: '58479d90aaeccef837849be331f895ca'
+	});
+
+	var track_url = 'http://soundcloud.com/forss/flickermood';
+	SC.oEmbed(track_url, { auto_play: false }).then(function(oEmbed) {
+	  console.log('oEmbed response: ', oEmbed);
+	  $('#trackContainer').append(oEmbed.html);
+	});
+	
 });
 
 function getPosts(){
