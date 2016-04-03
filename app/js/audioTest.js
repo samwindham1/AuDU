@@ -73,6 +73,7 @@ function init(url){
 	var backgroundAlpha = 1;
 	var hue = 0;
 	var paused = false; 
+	var playing = true;
 	$(canvas).css('cursor', 'none');
 	
 	draw();
@@ -169,8 +170,14 @@ function init(url){
 			}
 			else{
 				paused = true;
+				playing = false;
+				source.mediaElement.pause();
+				source.mediaElement.stop();
+				source.mediaElement = null;
+				source = null;
 				$(canvas).css('cursor', 'default');
-				return; 
+				canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+				return;
 			}
 			
 			//Draw the side bars
@@ -183,6 +190,7 @@ function init(url){
 	
 	$(canvas).on('click', function(){
 		if(paused){
+			// && playing
 			paused = false;
 			$(canvas).css('cursor', 'none');
 			source.mediaElement.play();
