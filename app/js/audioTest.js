@@ -168,6 +168,7 @@ function init(url){
 				canvasCtx.fillRect((canvas.width / 4), canvas.height - 20, (canvas.width / 2) - lostHealth, 20);
 			}
 			else{
+				
 				paused = true;
 				player.health = 100;
 				player.position = {
@@ -184,7 +185,7 @@ function init(url){
 		handle = window.requestAnimationFrame(draw);
 	};
 	
-	$(document).on('click', function(){
+	$(canvas).on('click', function(){
 		if(paused){
 			paused = false;
 		}
