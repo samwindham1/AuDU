@@ -2,6 +2,12 @@
 	margin: 0;
 	padding: 0;
 	font-size: 1em;
+	font-family: 'Exo 2', sans-serif;
+}
+body{
+	min-width: 600px;
+	width: auto !important;
+	
 }
 #trackContainer{
 	height: 100%;
@@ -14,20 +20,69 @@
 	padding: 0;
 }
 #header{
+	font: 
 	box-sizing: border-box;
 	height: 50px;
 	line-height: 50px;
 	width: 100%;
 	color: #FFF;
 	background-color: #333;
-	text-align: center; 
+	text-align: center;
+	overflow: hidden;
+	position: relative;
 }
+
+#SiteTitle, #scTrackInfo, #searchBarContainer{
+	height: 100%;
+	display: inline-block;
+	*display: inline;
+	vertical-align: top;
+}
+#searchBarContainer{
+	text-align: left;
+	width: 30%
+	min-width: 235px;
+	float: left;
+}
+#SiteTitle{
+	
+}
+#scTrackInfo {
+	width: 33%;
+	float: right;
+}
+#textInput{
+	width: 175px;
+	height: 30px;
+	font-size: 0.8em;
+	background: #FFFFFF;
+	padding-left: 10px;
+	margin-left:10px;
+	border: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#playButton{
+	height: 30px;
+	margin-left: 10px;
+	color: #FF5A08;
+}
+#playButton:hover{
+	color: #F58147;
+}
+button#playButton{
+	background: none;
+	border: none;
+}
+
+
 .track{
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0px;
 	height: auto;
-	overflow: hidden;
+	overflow: scroll;
 	cursor: pointer;
 }
 .track:hover{

@@ -5,7 +5,7 @@ function init(){
 	
     // `stream_url` you'd get from 
     // requesting http://api.soundcloud.com/tracks/239485245.json
-    url = 'http://api.soundcloud.com/tracks/239485245/stream' +
+    url = 'http://api.soundcloud.com/tracks/253797891/stream' +
           '?client_id=58479d90aaeccef837849be331f895ca';
 
 	audio.src = url;
