@@ -16,10 +16,8 @@ $(document).ready(function(){
 //Loads info about track
 function getTracks(){	
 	var value = $("#textInput").val();
-	console.log("String value: " + value);
 	
 	$.get(('http://api.soundcloud.com/resolve?url=' + value + '&client_id=58479d90aaeccef837849be331f895ca'), function (result) {
-		console.log("Result - 1: " + result.stream_url);
 		getEmbeddedPlayer(result.id, value, "#soundcloudContainer");
 		init(result.stream_url);
 	}, "json");
