@@ -73,6 +73,7 @@ function init(url){
 	var backgroundAlpha = 1;
 	var hue = 0;
 	var paused = false; 
+	$(canvas).css('cursor', 'none');
 	
 	draw();
 	
@@ -148,7 +149,7 @@ function init(url){
 			//Draw and update the player
 			player.position.X = mouseX;
 			canvasCtx.fillStyle = player.color;
-			canvasCtx.fillRect(player.position.X,  player.position.Y, 50, 50);		
+			canvasCtx.fillRect(player.position.X - player.width/2,  player.position.Y, 50, 50);		
 
 			//Draw and update all the enemies in the enemy list
 			for(var i = 0; i < enemiesList.length; i++) {		
@@ -169,6 +170,7 @@ function init(url){
 			}
 			else{
 				paused = true;
+				$(canvas).css('cursor', 'default');
 				player.health = 100;
 				player.position = {
 								X: canvas.width / 2, 
@@ -184,12 +186,14 @@ function init(url){
 		handle = window.requestAnimationFrame(draw);
 	};
 	
-	$(document).on('click', function(){
+	$(canvas).on('click', function(){
 		if(paused){
 			paused = false;
+			$(canvas).css('cursor', 'none');
 		}
 		else if(!paused){
 			paused = true;
+			$(canvas).css('cursor', 'default');
 		}
 	});
 }
