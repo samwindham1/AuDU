@@ -4,7 +4,6 @@ function init(){
 	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();	
     var audio = new Audio();
     var source;
-	
    
     url = 'http://api.soundcloud.com/tracks/237144827/stream' +
           '?client_id=58479d90aaeccef837849be331f895ca';
@@ -30,7 +29,7 @@ function init(){
 	//Set up canvas
 	var canvas = document.getElementById("mainCanvas");
 	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	canvas.height = window.innerHeight - 50;
 	var canvasCtx = canvas.getContext("2d");
 	
 	//canvas.width  = canvas.offsetWidth;

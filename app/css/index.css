@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	border: 0;
 	font-size: 1em;
 	font-family: 'Exo 2', sans-serif;
 }
@@ -12,7 +13,7 @@ html, body{
 }
 #mainCanvas {
 	float:left;
-	height: 100%;
+	width: 100%;
 	box-sizing: border-box;
 	bottom: 0;
 	top: 50px;

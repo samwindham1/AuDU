@@ -31,30 +31,6 @@ pool.getConnection(function(error, connection){
 		});
 	});
 	
-	//Exchange information through ajax
-	app.get('/getTrackByID', function (req, res) {	
-		connection.query("SELECT * FROM `tracks` WHERE id = " + req.query.trackID, function(errorQ1, rowsQ1){	
-			if (errorQ1){
-				console.log("ERROR: " + errorQ1 + " : " + rowsQ1); return errorQ1;
-			}
-			else{					 
-				res.send(rowsQ1[0]);
-			}
-		});
-	});
-	
-	//Exchange information through ajax
-	app.get('/setTrack', function (req, res) {	
-		connection.query("INSERT INTO `tracks` SET ?", req.query.trackData, function(errorQ1, rowsQ1){	
-			if (errorQ1){
-				console.log("ERROR: " + errorQ1 + " : " + rowsQ1); return errorQ1;
-			}
-			else{					 
-				res.send(rowsQ1);
-			}
-		});
-	});
-	
 	app.listen(3000, function () {
 		console.log('Listening on port 3000');
 	});
