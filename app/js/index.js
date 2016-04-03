@@ -25,7 +25,7 @@ function getTracks(){
 
 //Loads embedded track (media)
 function getEmbeddedPlayer(id, url, divID){
-	SC.oEmbed(url, { auto_play: false, maxheight: 50, show_comments: false}).then(function(oEmbed) {
+	SC.oEmbed(url, { auto_play: false, maxheight: 81, show_comments: false}).then(function(oEmbed) {
 		$(divID).html(oEmbed.html);
 		$(divID).children[0].focus();
 	});
