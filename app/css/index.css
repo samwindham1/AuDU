@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	border: 0;
 	font-size: 1em;
 	font-family: 'Exo 2', sans-serif;
 }
@@ -70,7 +71,7 @@ button#playButton{
 	border: none;
 }
 
-.soundcloudContainer{
+#soundcloudContainer{
 	width: 33%;
 	float: right;
 	height: 166px;

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSS -->
+    <link href="/css/index.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Exo+2:400,500,700' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+	
+	<!-- Scripts -->
+	<script src="/js/index.js"></script>
+	<script src="/js/audioTest.js"></script>
+	
+	</head>
+	<body>
+  		<div id="header">
+			<div id="searchBarContainer">
+				<input type="text" id="textInput" placeholder="Copy a SoundCloud URL here"/>
+				<button type="submit" id="playButton">
+					<i class="fa fa-play fa-lg"></i>
+				</button>
+			</div>
+			<div id="SiteTitle">
+				<p>Stack Heap</p>
+			</div>
+			<div id="soundcloudContainer"></div>
+		</div>
+
+	<!-- Canvas -->
+	<canvas id="mainCanvas" onmousemove="getMouseInput(event)"></canvas>
+	
+	</body>
+</html>
