@@ -121,7 +121,6 @@ function init(url){
 					//Restart the timer and spawn
 					lastTime = currentTime;
 					spawnEnemy(enemiesList, canvas, dataArray, volume);
-					
 				}
 				
 				hit = !hit;
@@ -169,14 +168,9 @@ function init(url){
 				canvasCtx.fillRect((canvas.width / 4), canvas.height - 20, (canvas.width / 2) - lostHealth, 20);
 			}
 			else{
-				
 				paused = true;
 				$(canvas).css('cursor', 'default');
-				player.health = 100;
-				player.position = {
-								X: canvas.width / 2, 
-								Y: (canvas.height / 4) * 3
-							};
+				return; 
 			}
 			
 			//Draw the side bars
@@ -191,10 +185,12 @@ function init(url){
 		if(paused){
 			paused = false;
 			$(canvas).css('cursor', 'none');
+			source.mediaElement.play();
 		}
 		else if(!paused){
 			paused = true;
 			$(canvas).css('cursor', 'default');
+			source.mediaElement.pause();
 		}
 	});
 }
