@@ -4,23 +4,21 @@
 	font-size: 1em;
 	font-family: 'Exo 2', sans-serif;
 }
-body{
+html, body{
 	min-width: 600px;
-	width: auto !important;
-	
-}
-#trackContainer{
-	height: 100%;
 	width: 100%;
-	-webkit-overflow-scrolling: touch;
-	box-sizing: border-box;
+	height: 100%;
+	/* cursor: none; */
 }
-#trackContainer ul{
-	list-style-type: none;
-	padding: 0;
+#mainCanvas {
+	float:left;
+	height: 100%;
+	box-sizing: border-box;
+	bottom: 0;
+	top: 50px;
+	position: absolute;
 }
 #header{
-	font: 
 	box-sizing: border-box;
 	height: 50px;
 	line-height: 50px;
