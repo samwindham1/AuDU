@@ -222,10 +222,10 @@ function spawnSideBar(enemiesList, canvas, barWidth, barHeight, barPosition){
 			damage: 0.5});
 }
 
-function spawnEnemy(enemiesList, canvas, dataArray){	
+function spawnEnemy(enemiesList, canvas, dataArray, volume){	
 	//Gather enemy data
 	var enemySize = 64;
-	var spawnBuffer = 400;
+	var spawnBuffer = (canvas.width - (volume * 2)) / 2;
 	var randomPosition = {X: (canvas.width / 2) + ((Math.random() * 2) - 1) * spawnBuffer, Y: -enemySize};
 	
 	enemiesList.push({id: enemiesList.length,
