@@ -1,9 +1,11 @@
+var mouseX;
+
 function init(){
 	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();	
     var audio = new Audio();
     var source;
 	
-    url = 'http://api.soundcloud.com/tracks/239485245/stream' +
+    url = 'http://api.soundcloud.com/tracks/237144827/stream' +
           '?client_id=58479d90aaeccef837849be331f895ca';
 
 	audio.src = url;
@@ -53,17 +55,18 @@ function init(){
 	var enemiesList = [];
 	
 	//Set up character
-	var player = {	color: 'rgb(50, 0, 0)',
+	var player = {	color: 'rgb(255, 255, 255)',
 					position: 
 						{
 							X: canvas.width / 2, 
 							Y: (canvas.height / 4) * 3
 						},
-					speed: 10
+					speed: 10,
+					width: 50,
+					height: 50,
+					health: 100
 				};
-	
-	handleMovement(player);
-	
+		
 	var backgroundAlpha = 1;
 	var hue = 0;
 	
@@ -112,14 +115,19 @@ function init(){
 				//Restart the timer and spawn
 				lastTime = currentTime;
 				spawnEnemy(enemiesList, canvas, dataArray);
+				
 			}
 			
 			hit = !hit;
 		}
 		
+		var volumeScale = 2;
+		spawnSideBar(enemiesList, canvas, volume * volumeScale, canvas.height / bufferLength, {X: 0, Y: -(canvas.height / bufferLength)});
+		spawnSideBar(enemiesList, canvas, volume * volumeScale, canvas.height / bufferLength, {X: canvas.width - (volume * volumeScale), Y: 0});
+		
 		backgroundAlpha += delta;
-		if(backgroundAlpha <= 0){
-			backgroundAlpha = 0;
+		if(backgroundAlpha <= 0.1){
+			backgroundAlpha = 0.1;
 		}
 		
 		if(hue <= 360){
@@ -131,28 +139,64 @@ function init(){
 
 		canvasCtx.fillStyle = 'hsla(' + hue + ', 100%, 50%, ' + backgroundAlpha + ')';
 		canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-				
+
 		//Draw and update all the enemies in the enemy list
-		for(var i = 0; i < enemiesList.length; i++) {
+		for(var i = 0; i < enemiesList.length; i++) {		
 			canvasCtx.fillStyle = enemiesList[i].color;
 			canvasCtx.fillRect(enemiesList[i].position.X,  enemiesList[i].position.Y, enemiesList[i].width, enemiesList[i].height);
 			
 			updateEnemy(enemiesList, canvas, i);
+			updatePlayer(player, enemiesList, canvas, i);
 		}
-				
-		//Draw the player
+		
+		//Draw the health bar
+		if(player.health > 0){
+			canvasCtx.fillStyle = 'rgb(255, 66, 227)';
+			var units = (canvas.width/2) / 100;
+			var lostHealth = ((100 - player.health) * units);
+			
+			canvasCtx.fillRect((canvas.width / 4), canvas.height - 20, (canvas.width / 2) - lostHealth, 20);
+		}
+		else{
+			alert("You're Dead!");
+			player.health = 100;
+			player.position = {
+							X: canvas.width / 2, 
+							Y: (canvas.height / 4) * 3
+						};
+		}
+					
+		//Draw and update the player
+		player.position.X = mouseX;
 		canvasCtx.fillStyle = player.color;
-		canvasCtx.fillRect(player.position.X,  player.position.Y, 50, 50);
+		canvasCtx.fillRect(player.position.X,  player.position.Y, 50, 50);		
+		
+		//Draw the side bars
+		canvasCtx.fillStyle = 'rgb(0, 0, 0)';
 		
 		//Fix tearing
 		handle = window.requestAnimationFrame(draw);
 	};
 }
 
+function updatePlayer(player, enemiesList, canvas, i){
+	//Check for player collision
+	
+	//If block is in range of player
+	if((enemiesList[i].position.Y >= player.position.Y) && (enemiesList[i].position.Y < player.position.Y + enemiesList[i].height)){
+		if( player.position.X > enemiesList[i].position.X && player.position.X < enemiesList[i].position.X + enemiesList[i].width ||
+			player.position.X + player.width > enemiesList[i].position.X && player.position.X + player.width < enemiesList[i].position.X + enemiesList[i].width){
+			player.health -= enemiesList[i].damage;
+		}
+	}
+}	
+
 function updateEnemy(enemiesList, canvas, index){
+	var bufferArea = 100;
+
 	moveEnemyDownward(enemiesList[index]);
 	
-	if(enemiesList[index].position.Y > canvas.height){
+	if(enemiesList[index].position.Y > canvas.height + bufferArea){
 		removeEnemy(enemiesList, index);
 	}
 }
@@ -163,6 +207,16 @@ function avgVolume(array){
 		values += array[i];
 	}
 	return values / array.length;
+}
+
+function spawnSideBar(enemiesList, canvas, barWidth, barHeight, barPosition){
+	enemiesList.push({id: enemiesList.length,
+			color: 'rgb(0, 0, 0)',
+			position: barPosition,
+			speed: 4,
+			width: barWidth,
+			height: barHeight,
+			damage: 0.5});
 }
 
 function spawnEnemy(enemiesList, canvas, dataArray){	
@@ -176,7 +230,8 @@ function spawnEnemy(enemiesList, canvas, dataArray){
 			position: randomPosition,
 			speed: 4,
 			width: enemySize,
-			height: enemySize});
+			height: enemySize,
+			damage: 0.5});
 }
 
 function removeEnemy(enemiesList, index){
@@ -205,15 +260,6 @@ function moveEnemyTowardPosition(enemy, position){
     enemy.rotation = Math.atan2(toPlayerY, toPlayerX);
 }
 
-function handleMovement(player){
-	document.addEventListener('keydown', function(event) {
-		if(event.keyCode == 37) {
-			//Left
-			player.position.X -= player.speed;
-		}
-		if(event.keyCode == 39) {
-			//Right
-			player.position.X += player.speed;
-		}
-	});
+function getMouseInput(event){
+	mouseX = event.clientX;
 }
