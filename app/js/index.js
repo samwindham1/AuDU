@@ -6,6 +6,7 @@ $(document).ready(function(){
 	});
 	
 	$("#playButton").click(function(){
+		$("#noTrack").hide();
 		getTracks();
 	});
 	
