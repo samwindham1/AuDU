@@ -27,7 +27,7 @@ html, body{
 	color: #FFF;
 	background-color: #333;
 	text-align: center;
-	overflow: hidden;
+	overflow: visible;
 	position: relative;
 }
 
@@ -75,4 +75,6 @@ button#playButton{
 	width: 33%;
 	float: right;
 	height: 166px;
+	position: relative;
+	z-index: 1000;
 }
