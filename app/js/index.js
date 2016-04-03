@@ -1,55 +1,12 @@
 $(document).ready(function(){
-	init();
-	//getTracks();
 	
 	//Set up soundcloud secret
 	SC.initialize({
 	  client_id: '58479d90aaeccef837849be331f895ca'
 	});
 	
-	var currentSelectedID;
-	$(document).on('click', '.track', function(){	
-	
-		var scContainer = $(this).find(".soundcloudContainer");
-		
-		//If it doesn't exist
-		if(currentSelectedID === undefined){
-			//Set initial value
-			currentSelectedID = this.id;
-			
-			scContainer.show();
-			scContainer.html(
-				getEmbeddedPlayer(this.id, scContainer)
-			);
-		}
-		else{
-			if(this.id == currentSelectedID){
-				if(scContainer.css("display") === "none"){
-					scContainer.show();
-					scContainer.html(
-						getEmbeddedPlayer(this.id, scContainer)
-					);
-				}
-				else{
-					scContainer.hide();
-					scContainer.empty();
-				}
-			}
-			else{
-				//Hide old one
-				$("#" + currentSelectedID).find(".soundcloudContainer").hide();
-				$("#" + currentSelectedID).find(".soundcloudContainer").empty();
-				
-				//Show the new one
-				scContainer.show();
-				scContainer.html(
-					getEmbeddedPlayer(this.id, scContainer)
-				);
-				
-				currentSelectedID = this.id; 
-			}
-		}
-		
+	$("#playButton").click(function(){
+		getTracks();
 	});
 	
 	//Admin only
@@ -58,43 +15,33 @@ $(document).ready(function(){
 
 //Loads info about track
 function getTracks(){
-	$.ajax({
-		url: "/getTracks"
+	console.log('http://api.soundcloud.com/resolve?url=' + $("#textInput").val() +'&client_id=58479d90aaeccef837849be331f895ca');
+	
+	/*
+	$.get('http://api.soundcloud.com/resolve?url=' + $("#textInput").val().trim() + '&client_id=58479d90aaeccef837849be331f895ca', function (result) {
+	  console.log(result);
+	});
+	*/
+	
+	SC.resolve($("#textInput").val()).then(function(track){
+		console.log("tas");
+	});
+	
+	/*$.ajax({
+		type: "GET",
+		url: 'http://api.soundcloud.com/resolve?url=' + $("#textInput").val() +'&client_id=58479d90aaeccef837849be331f895ca',
+		success: function(result){
+			console.log('Track Id: ' + result.stream_url);
+			setAudioSource(result.stream_url);
+		},
 	}).done(function(data) {
-		for(var i = 0; i < data.length; i++){			
-			$('#trackContainer').append(
-				"<ul>" +
-					"<li>" + 
-						"<div class='track' id=" + data[i].id + ">" +
-							"<div class='trackInfo'>" + data[i].name + "</div>" + 
-							"<div class='soundcloudContainer'></div><script>$('.soundcloudContainer').hide();</script>" + 
-						"</div>" +
-					"</li>" +
-				"</ul>"
-			);
-		}
+		//Get information about track back here in data
+		
+		init();
 	}).fail(function(xhr, status, error){
 		console.log("Status: " + status + " Error: " + error);
 		console.log(xhr);
-	});
-}
-
-/*
-	Format of trackToSet:
-	{name: x, artist: x, length: x, genre: x, url: x, rating: x}
-*/
-function setTrack(trackToSet){
-	$.ajax({
-		url: "/setTrack",
-		data: {
-			trackData: trackToSet
-		}
-	}).done(function(data) {
-		//Track has been added to database
-	}).fail(function(xhr, status, error){
-		console.log("Status: " + status + " Error: " + error);
-		console.log(xhr);
-	});
+	});*/
 }
 
 //Loads embedded track (media)
