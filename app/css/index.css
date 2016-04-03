@@ -71,7 +71,7 @@ button#playButton{
 	border: none;
 }
 
-.soundcloudContainer{
+#soundcloudContainer{
 	width: 33%;
 	float: right;
 	height: 166px;
