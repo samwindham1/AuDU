@@ -1,24 +1,24 @@
 $(document).ready(function(){
-	
+
 	//Set up soundcloud secret
 	SC.initialize({
 	  client_id: '58479d90aaeccef837849be331f895ca'
 	});
-	
+
 	$("#playButton").click(function(){
 		$("#noTrack").hide();
 		getTracks();
 	});
-	
+
 	//Admin only
 	//setTrack({name: "testName", genre: "Rap"});
 });
 
 //Loads info about track
-function getTracks(){	
+function getTracks(){
 	var value = $("#textInput").val();
-	
-	$.get(('http://api.soundcloud.com/resolve?url=' + value + '&client_id=58479d90aaeccef837849be331f895ca'), function (result) {
+
+	$.get(('https://api.soundcloud.com/resolve?url=' + value + '&client_id=58479d90aaeccef837849be331f895ca'), function (result) {
 		getEmbeddedPlayer(result.id, value, "#soundcloudContainer");
 		init(result.stream_url);
 	}, "json");
