@@ -4,6 +4,6 @@ Web app that uses Javascript to pull audio from soundcloud and generate a game l
 
 
 
-![alt tag](https://raw.githubusercontent.com/samwindham1/AuDU/master/Screenshot1.png)
+![alt tag](./images/Screenshot1.png)
 
-![alt tag](https://raw.githubusercontent.com/samwindham1/AuDU/master/Screenshot2.png)
+![alt tag](./images/Screenshot2.png)
