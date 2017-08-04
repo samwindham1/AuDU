@@ -1,5 +1,5 @@
 # AuDU
-Web app that uses Javascript to pull audio from soundcloud and generate a game live from the stream.
+Web app that pulls an audio stream from SoundCloud's API and generates a live game with beat detection.
 
 
 
